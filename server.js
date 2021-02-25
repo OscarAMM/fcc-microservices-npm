@@ -18,9 +18,16 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 /**Request Header Parser Microservice**/
-app.get('/api/whoami', function(req,res, next){
+app.get('/api/whoami', function(req,res){
+    var ip = req.ip;
+    var language =  req.headers["accept-language"];
+    var software = req.headers["user-agent"];
     console.log(req.method + " " + req.path + " - " + req.ip);
-    next();
+    res.json({
+        ipaddress : ip,
+        language : language,
+        software: software
+    });
 });
 
 
